@@ -43,7 +43,6 @@ var isMatch = function(){
 	}
 
 }
-
 var isTwoCards = function() {
 	cardsInPlay.push(this.getAttribute('data-card'))
 	if (this.getAttribute('data-card') === "king") {
@@ -69,6 +68,11 @@ var clearCards = function(){
 	CardElements[i].innerHTML ='';
 }
 	}
+var reset = function(){
+	clearCards();
+	score = 0;
+	document.getElementById("Score").innerHTML = score;
+}
 
 //sets up the board for the game
 createBoard();
