@@ -6,6 +6,14 @@ var cardFour = "king";
 
 //if (cardOne === cardFour){ alert("You found a match!");} else {alert("Sorry, try again.");} -->
 
+var cards = ["queen", "queen", "king", "king"]
+var cardsInPlay = [];
+// made this to referenced later to clean the board 
+var CardElements = document.getElementsByClassName('card');
+var score = 0;
+//counts the number of matches before the board is cleared
+var roundcount = 0;
+
 var createBoard = function(){
 for (i = 0; i <= cards.length - 1; i++){
 	var GBoard = document.getElementById('game-board');
@@ -17,17 +25,12 @@ for (i = 0; i <= cards.length - 1; i++){
 	newCard.addEventListener('click', isTwoCards);
 	}
 }
-var cards = ["queen", "queen", "king", "king"]
-var cardsInPlay = [];
-// made this to referenced later to clean the board 
-var CardElements = document.getElementsByClassName('card');
-var score = 0;
-//counts the number of matches before the board is cleared
-var roundcount = 0;
+
+
 
 
 var isMatch = function(){
-	if (cardsInPlay[0] === cardsInPlay[1]){
+	if (cardsInPlay[0].getAttribute('data-card') === cardsInPlay[1].getAttribute('data-card')){
 	//delayed the alerts and clear function so that the card img would be come first.
 	setTimeout(function(){alert("You found a match!");}, 200);
 	//Updates score Variable and updates it in the html 
@@ -36,6 +39,9 @@ var isMatch = function(){
 	roundcount = roundcount + 1;
 	}
 	else {
+	//remove attribute of "clicked"
+	cardsInPlay[0].removeAttribute("data-clicked");
+	cardsInPlay[1].removeAttribute("data-clicked");
 	setTimeout(function()
 		{alert("Sorry, try again.");
 		clearCards();
@@ -44,7 +50,18 @@ var isMatch = function(){
 
 }
 var isTwoCards = function() {
-	cardsInPlay.push(this.getAttribute('data-card'))
+	// read the attribute called data-clicked
+	// check if clicked
+	// if clicked stop here 
+	if (this.getAttribute("data-clicked")) return alert("can't click twice!")
+	// if not clicked make it clicked
+	this.setAttribute("data-clicked",true);
+	// continue
+	cardsInPlay.push(this);
+	console.log(cardsInPlay);
+	// cardsInPlay.push(this.getAttribute('data-card'))
+
+
 	if (this.getAttribute('data-card') === "king") {
 	this.innerHTML = '<img src ="king.png" alt="KingHalf"/>';
 		}
