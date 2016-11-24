@@ -59,8 +59,6 @@ var isTwoCards = function() {
 	// continue
 	cardsInPlay.push(this);
 	console.log(cardsInPlay);
-	// cardsInPlay.push(this.getAttribute('data-card'))
-
 
 	if (this.getAttribute('data-card') === "king") {
 	this.innerHTML = '<img src ="king.png" alt="KingHalf"/>';
